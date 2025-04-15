@@ -1,0 +1,22 @@
+services:
+  xeoma:
+    image: obrubov/dockerxeoma
+    container_name: xeoma
+    restart: always
+    networks:
+      my_net:
+        mac_address: 02:42:AC:11:00:02
+    #network_mode: host
+    ports:
+      - 8090:8090
+      - 10090:10090
+    volumes:
+      - /srv/ssd2000/DVR/Xpool_0:/archive
+      - /media/xeoma/config/pool_0:/config
+      - /srv/ssd2000/DVR/Xpool_0/archive-cache:/archive-cache
+    environment:
+      - VERSION=https://felenasoft.com/xeoma/downloads/2024-09-24/linux/xeoma_linux64.tgz
+      - PASSWORD=basic
+networks:
+  my_net:
+    driver: bridge
